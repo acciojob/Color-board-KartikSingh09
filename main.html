@@ -1,16 +1,68 @@
 <!DOCTYPE html>
-
-<html>
-
+<html lang="en">
 <head>
-	<link rel="stylesheet" href="styles.css">
-</head>
+  <meta charset="UTF-8">
+  <title>Color Board</title>
+  <style>
+    body {
+      background: #111;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
 
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(20px, 1fr));
+      gap: 2px;
+      width: 800px;
+      max-width: 90vw;
+    }
+
+    .square {
+      width: 20px;
+      height: 20px;
+      background-color: #1d1d1d;
+      transition: background-color 1s ease;
+    }
+  </style>
+</head>
 <body>
-	<!-- the entire body must be written by student -->
-    <script type="text/javascript" src="./script.js">
-</script>
+
+  <div class="container" id="board"></div>
+
+  <script>
+    const container = document.getElementById('board');
+    const SQUARES = 800;
+
+    for (let i = 0; i < SQUARES; i++) {
+      const square = document.createElement('div');
+      square.classList.add('square');
+
+      square.addEventListener('mouseover', () => {
+        setColor(square);
+        setTimeout(() => removeColor(square), 1000);
+      });
+
+      container.appendChild(square);
+    }
+
+    function setColor(element) {
+      const color = getRandomColor();
+      element.style.backgroundColor = color;
+    }
+
+    function removeColor(element) {
+      element.style.backgroundColor = '#1d1d1d';
+    }
+
+    function getRandomColor() {
+      const colors = ['#e74c3c', '#8e44ad', '#3498db', '#e67e22', '#2ecc71'];
+      return colors[Math.floor(Math.random() * colors.length)];
+    }
+  </script>
 
 </body>
-
 </html>
